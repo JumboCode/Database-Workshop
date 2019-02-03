@@ -1,0 +1,20 @@
+html
+  body
+    h1=message
+    table(style='width:80%', border='1')
+      tr
+      th Index
+      th Person
+      th Thought
+
+      for t, index in thoughts
+        tr
+        td= index
+        td= t.person
+        td= t.message
+
+
+  form(action='/add', method='POST')
+    input(placeholder='person', type='text', name='person', value='')
+    input(placeholder='thought', type='text', name='thought', value='')
+    input(type='submit', value='Submit')

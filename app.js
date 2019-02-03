@@ -1,10 +1,20 @@
-const http = require('http');
 
-const hostname = '127.0.0.1';
+//
+// app.js
+//
+
+const http = require('http');
+const express = require('express');
+const pgp = require('pg-promise')(/*options*/);
+
+
+const bodyParser = require('body-parser');
+
+
+const app = express()
 const port = 3000;
 
-
-const pgp = require('pg-promise')(/*options*/);
+app.use(bodyParser.urlencoded({ extended: false }));
 
 var cn = {
     host: 'localhost', // server name or IP address;
@@ -14,25 +24,56 @@ var cn = {
     password: 'supersecret'
 };
 
+
+app.set('view engine', 'pug')
+
 var db = pgp(cn); // database instance;
 
-// select and return user name from id:
-//db.one("CREATE TABLE thought( FROM users WHERE id = $1", 123)
-//    .then(user => {
-//        console.log(user.name); // print user name;
-//    })
-//    .catch(error => {
-//        console.log(error); // print the error;
-//    });
+//
+// API ENDPOINTS
+//
 
-
-
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World\n');
+app.get('/', function (req, res) {
+  res.send('Your Database Tutorial Server is Running Correctly! Navigate to /table to continue!')
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+
+app.get('/table', function (req, res) {
+
+  // select and return user name from id:
+  db.any('SELECT * FROM thought')
+    .then(function(data) {
+        console.log(data);
+        res.render('index', { thoughts: data})
+
+      })
+    .catch(error => {
+        console.log("Error");
+        res.send(error); // print the error;
+    });
 });
+
+
+
+app.post('/add', function (req, res) {
+
+  var person = req.body.person;
+  var thought = req.body.thought;
+
+  // Insert new RECORD into TABLE thought
+  // If Sucessful Insertion / Redirect to List Page
+   
+  db.one("INSERT INTO thought(person, message) VALUES ($1, $2) RETURNING person", [person, thought])
+    .then(function(data) {
+        console.log(data);
+        res.redirect('/table')
+      })
+    .catch(error => {
+        console.log(error);
+        res.send(error); // print the error;
+    });
+});
+
+
+
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))

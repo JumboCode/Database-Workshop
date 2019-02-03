@@ -21,6 +21,8 @@ JumboCode Feb 2019 Workshop on Databases
 
 
 # Helpful postgres queries
+  * To wipe out all entries from a table, `DELETE FROM <table-name>`;
+
 
 # Helpful psql command line interface commands f
 

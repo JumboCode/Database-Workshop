@@ -16,6 +16,10 @@ const port = 3000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
+
+// Database Configuration Information
+// Don't keep password in plaintext for production code!!
+
 var cn = {
     host: 'localhost', // server name or IP address;
     port: 5432,
@@ -29,6 +33,7 @@ app.set('view engine', 'pug')
 
 var db = pgp(cn); // database instance;
 
+
 //
 // API ENDPOINTS
 //
@@ -40,16 +45,16 @@ app.get('/', function (req, res) {
 
 app.get('/table', function (req, res) {
 
-  // select and return user name from id:
+  // Return all records from database
   db.any('SELECT * FROM thought')
     .then(function(data) {
         console.log(data);
-        res.render('index', { thoughts: data})
+        res.render('table', { thoughts: data})
 
       })
     .catch(error => {
         console.log("Error");
-        res.send(error); // print the error;
+        res.send(error);
     });
 });
 
@@ -61,8 +66,8 @@ app.post('/add', function (req, res) {
   var thought = req.body.thought;
 
   // Insert new RECORD into TABLE thought
-  // If Sucessful Insertion / Redirect to List Page
-   
+  // If Sucessful Insertion / Redirect to table
+
   db.one("INSERT INTO thought(person, message) VALUES ($1, $2) RETURNING person", [person, thought])
     .then(function(data) {
         console.log(data);

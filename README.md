@@ -5,7 +5,10 @@ JumboCode Feb 2019 Workshop on Databases
 
 # Getting Started
 
+1. To get the database up and running, run  `sh setup.sh`
 
+
+## Steps in Setup.sh
 
 1. Install postgres with `brew install postgres`
 2. Create user with command `psql postgres -c "CREATE USER database_tutorial WITH PASSWORD 'supersecret';"`
@@ -15,3 +18,13 @@ JumboCode Feb 2019 Workshop on Databases
 6. Insert a test record with `psql postgres -c "INSERT INTO thought VALUES ('spencer', 'Monaco?');"`
 
 # ENV variable to switch between sqllite driver and postgres
+
+
+# Helpful postgres queries
+
+# Helpful psql command line interface commands f
+
+  * Connect to a database with `postgres=# \connect <database-name>`
+  * List all databases with `postgres=#  \l`
+  * List all tables of the connected  database `\dt`
+  * Describe a table of the connected database `\d table_name`

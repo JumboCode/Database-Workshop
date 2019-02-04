@@ -1,5 +1,5 @@
 # Database-Workshop
-JumboCode Feb 2019 Workshop on Databases
+JumboCode Feb 2019 Workshop on Databases and thoughts.
 
 
 

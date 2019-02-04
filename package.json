@@ -1,7 +1,7 @@
 {
-  "name": "jumbosmash-server",
+  "name": "jumbocode workshop",
   "version": "0.0.1",
-  "description": "JumboSmash 2019",
+  "description": "JumboCode Workshop",
   "engines": {
     "node": "^8.12.0",
     "postgres": "^10.5.x"

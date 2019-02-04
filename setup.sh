@@ -1,5 +1,5 @@
 # install psql
-# brew install postgresql;
+brew install postgresql;
 
 # create user and database
 createuser jumbocode_workshop_user

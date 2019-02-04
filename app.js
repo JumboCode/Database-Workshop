@@ -58,7 +58,7 @@ app.post("/add", function(req, res) {
   // If Sucessful Insertion / Redirect to table
 
   db.one(
-    "INSERT INTO thoughts(person, message) VALUES ($1, $2) RETURNING person",
+    "INSERT INTO thoughts(persons, message) VALUES ($1, $2) RETURNING person",
     [person, thought]
   )
     .then(function(data) {

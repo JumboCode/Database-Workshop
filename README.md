@@ -7,6 +7,13 @@ JumboCode Feb 2019 Workshop on Databases
 
 1. To get the database up and running, run  `sh setup.sh`
 
+## Application
+
+1. Make sure to have node installed `brew install node` for mac users
+2. Install libraries with `npm install`
+3. Run the server with `npm run start`
+
+
 
 ## Steps in Setup.sh
 
@@ -16,8 +23,6 @@ JumboCode Feb 2019 Workshop on Databases
 4. Give permissions to edit the database to the created user `psql postgres -c "GRANT ALL PRIVILEGES ON DATABASE database_tutorial to database_tutorial;"`
 5. Create table `psql postgres -c "CREATE TABLE thought ( person VARCHAR (50) NOT NULL, message VARCHAR (255) NOT NULL);"``
 6. Insert a test record with `psql postgres -c "INSERT INTO thought VALUES ('spencer', 'Monaco?');"`
-
-# ENV variable to switch between sqllite driver and postgres
 
 
 # Helpful postgres queries
